@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200">
+  <!-- Icon badge -->
+  <rect x="0" y="0" width="200" height="200" rx="44" fill="#1B1F3B"/>
+  <polygon points="100,38  138,100  100,162  62,100" fill="none" stroke="#FFFFFF" stroke-width="5"/>
+  <line x1="100" y1="100" x2="100" y2="162" stroke="#FFFFFF" stroke-width="2.5"/>
+  <polygon points="100,38  138,100  100,100  62,100" fill="#4B6EF5"/>
+  <polygon points="62,100  100,100  100,162" fill="#FFFFFF" opacity="0.9"/>
+  <polygon points="100,100  138,100  100,162" fill="#FFFFFF" opacity="0.55"/>
+  <line x1="100" y1="108" x2="100" y2="162" stroke="#1B1F3B" stroke-width="3"/>
+  <ellipse cx="100" cy="170" rx="5" ry="7" fill="#4B6EF5"/>
+  <circle cx="100" cy="30" r="6" fill="#F5C542"/>
+  <line x1="154" y1="46" x2="164" y2="36" stroke="#F5C542" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="160" y1="58" x2="173" y2="54" stroke="#F5C542" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <line x1="148" y1="34" x2="152" y2="24" stroke="#F5C542" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Wordmark -->
+  <text x="228" y="132"
+        font-family="'Arial Black','Impact','Helvetica Neue',Arial,sans-serif"
+        font-size="88" font-weight="900" fill="#1B1F3B" letter-spacing="-3">draft</text>
+  <text x="468" y="132"
+        font-family="'Arial Black','Impact','Helvetica Neue',Arial,sans-serif"
+        font-size="88" font-weight="900" fill="#4B6EF5" letter-spacing="-3">ly</text>
+
+  <!-- Tagline -->
+  <text x="230" y="164"
+        font-family="'Helvetica Neue',Arial,sans-serif"
+        font-size="15" font-weight="400" fill="#888888" letter-spacing="4">WRITE LIKE YOU MEAN IT</text>
+</svg>
