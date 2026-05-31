@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Draftly LinkedIn Pro — comments & connections that get accepted</title>
+<meta name="description" content="Draftly LinkedIn Pro writes sharp post comments by tone and personalised connection-request notes tuned to get accepted — right inside LinkedIn, under 200 characters, no placeholders." />
+<link rel="icon" href="assets/draftly_favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="aurora"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
+<svg width="0" height="0" style="position:absolute"><symbol id="nib" viewBox="0 0 200 200"><rect x="2" y="2" width="196" height="196" rx="42" fill="#10183a" stroke="#34d6e8" stroke-width="3"/><polygon points="100,40 138,100 100,160 62,100" fill="none" stroke="#fff" stroke-width="6"/><polygon points="100,40 138,100 100,100 62,100" fill="#4B6EF5"/><polygon points="62,100 100,100 100,160" fill="#fff" opacity=".92"/><polygon points="100,100 138,100 100,160" fill="#fff" opacity=".55"/><circle cx="100" cy="32" r="8" fill="#F5C542"/></symbol></svg>
+
+<header>
+  <nav>
+    <a class="brand" href="index.html"><svg><use href="#nib"/></svg>draft<span class="ly">ly</span></a>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleNav()">☰</button>
+    <div class="nav-links" id="nl">
+      <a class="lnk" href="index.html">Home</a>
+      <a class="lnk" href="features.html">Features</a>
+      <a class="lnk active" href="linkedin.html">LinkedIn Pro</a>
+      <a class="lnk" href="privacy.html">Privacy</a>
+      <a class="btn btn-primary" href="index.html#get">Add to Chrome</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HEAD -->
+  <section class="wrap page-head">
+    <span class="eyebrow reveal in" style="display:inline-flex">💼 LinkedIn Pro · New</span>
+    <h1 class="reveal in" data-d="1">Win the comment.<br><span class="grad-aur">Land the connection.</span></h1>
+    <p class="reveal in" data-d="2">Draftly reads the post or the profile right on the page, then writes a comment or an invitation note that sounds like a sharp human — not a bot. Pick the angle, watch it write, send.</p>
+    <div class="hero-cta reveal in" data-d="3" style="margin-top:30px"><a class="btn btn-primary" href="index.html#get">Add to Chrome — free</a><a class="btn btn-ghost" href="#note">See connection notes</a></div>
+  </section>
+
+  <!-- LIVE COMMENT DEMO -->
+  <section class="wrap sec">
+    <div class="shead reveal"><span class="eyebrow">Live · comments</span><h2>Comment in the <span class="grad">right voice</span>, instantly</h2><p>It reads the actual post, then writes to the tone you choose. Watch it switch angles in real time.</p></div>
+    <div class="li-demo reveal" data-d="1">
+      <div class="li-post">
+        <div class="li-top"><div class="li-av"></div><div><div class="li-name">Jordan Mehta · 2nd</div><div class="li-sub">Founder &amp; CEO · Building in public</div></div></div>
+        <div class="li-postbody">Hot take after 8 years of hiring: the best people I ever brought on were never the fastest to start. They were the ones I trusted. Speed is overrated. Trust compounds.</div>
+        <div class="li-actions"><span>👍 Like</span><span>💬 Comment</span><span>↻ Repost</span><span>➤ Send</span></div>
+      </div>
+      <div class="li-commentbar">
+        <div class="li-tones" id="li-tones">
+          <span class="li-tone on" data-tone="ceo">⚡ CEO</span>
+          <span class="li-tone" data-tone="insightful">Insightful</span>
+          <span class="li-tone" data-tone="supportive">Supportive</span>
+          <span class="li-tone" data-tone="curious">Curious</span>
+        </div>
+        <div class="li-out"><span class="li-outlabel">✦ Draftly · writing…</span><span id="li-out"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE NOTE DEMO -->
+  <section class="wrap sec" id="note">
+    <div class="shead reveal"><span class="eyebrow">Live · connection notes</span><h2>Invitations tuned to <span class="grad">get accepted</span></h2><p>It pulls the person's real name and headline from their profile, then writes a personal note — always under LinkedIn's 200‑character limit, never a [placeholder].</p></div>
+    <div class="li-demo reveal" data-d="1" style="max-width:480px">
+      <div class="li-post" style="display:flex;align-items:center;gap:12px"><div class="li-av"></div><div><div class="li-name">Sarah Lindqvist</div><div class="li-sub">Head of Design @ Linear · 2nd</div></div><span class="new" style="position:static;margin-left:auto">Connect</span></div>
+      <div class="li-commentbar">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span class="li-outlabel" style="margin:0">✦ Personalised note</span><span id="note-count" style="font-size:11px;color:var(--cyan);font-weight:700">0/200</span></div>
+        <div class="li-out" style="min-height:72px"><span id="note-out"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT THINKS -->
+  <section class="wrap sec">
+    <div class="shead reveal"><span class="eyebrow">Why it lands</span><h2>Built to sound <span class="grad">human</span></h2></div>
+    <div class="cards">
+      <div class="card reveal" data-d="1"><div class="ic">🎯</div><h3>Reads the real context</h3><p>Pulls the actual post text, or the person's name &amp; headline, straight from the page — so every line is specific, never generic.</p></div>
+      <div class="card reveal" data-d="2"><div class="ic">🎭</div><h3>Six angles, one click</h3><p>CEO one‑liner, insightful, supportive, curious — for comments. Connect, referral, hiring, collab &amp; more — for notes.</p></div>
+      <div class="card reveal" data-d="3"><div class="ic">🚫</div><h3>No AI tells</h3><p>Bans "Great post!", "Couldn't agree more" and bracketed placeholders. Contractions, real opinions, human rhythm.</p></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="wrap sec">
+    <div class="stats">
+      <div class="stat reveal" data-d="1"><div class="n"><span data-count="200" data-suffix="">0</span></div><div class="l">Character limit — every note stays under it</div></div>
+      <div class="stat reveal" data-d="2"><div class="n"><span data-count="6" data-suffix="">0</span></div><div class="l">Connection reasons, each written differently</div></div>
+      <div class="stat reveal" data-d="3"><div class="n"><span data-count="0" data-suffix="">0</span></div><div class="l">Placeholders, ever — real details only</div></div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="wrap final" id="get">
+    <div class="final-bloom"></div>
+    <span class="eyebrow reveal" style="justify-content:center;position:relative;z-index:2">Free · Bring your own key</span>
+    <h2 class="reveal" data-d="1" style="margin-top:18px">Grow on LinkedIn<br><span class="grad-aur">without the cringe.</span></h2>
+    <p class="reveal" data-d="2">Turn on LinkedIn Pro in the Draftly popup and it appears right inside LinkedIn — comments and notes, on demand.</p>
+    <a class="btn btn-primary reveal" data-d="3" href="index.html#get" style="padding:15px 30px;font-size:16px">Add to Chrome — free</a>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <a class="brand" href="index.html"><svg style="width:26px;height:26px"><use href="#nib"/></svg>draft<span class="ly">ly</span></a>
+    <div class="foot-links"><a href="index.html">Home</a><a href="features.html">Features</a><a href="linkedin.html">LinkedIn Pro</a><a href="privacy.html">Privacy</a></div>
+  </div>
+  <div class="foot-copy"><span>© 2026 Draftly · Write like you mean it.</span><span>Keys stored on your device only — never sent to Draftly servers.</span></div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
