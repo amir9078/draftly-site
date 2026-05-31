@@ -46,34 +46,63 @@ function typeInto(el, text, speed, done) {
   })();
 }
 
-/* ── HERO live rewrite demo ── */
-(function heroDemo() {
-  const bad = document.getElementById('demo-bad');
-  const good = document.getElementById('demo-good');
-  if (!bad || !good) return;
-  const pairs = [
-    ['I am writing to express my sincere gratitude for the opportunity and look forward to the possibility of collaborating.',
-     "Thanks so much for this — I'd genuinely love to work together. Let's make it happen."],
-    ['Please be advised that I will be unable to attend the meeting scheduled for tomorrow afternoon.',
-     "Heads up — I can't make tomorrow afternoon's meeting. Can we find another time?"],
-    ['I hope this message finds you well. I wanted to kindly follow up regarding my previous correspondence.',
-     "Hi again! Just circling back on my last note — any thoughts?"],
-    ['It would be greatly appreciated if you could provide the requested documentation at your earliest convenience.',
-     "Could you send over those docs when you get a sec? No rush."]
-  ];
+/* ── reusable "before → after" typing demo (hero + every feature) ── */
+function setupRewriteDemo(goodId, badId, pairs, speed) {
+  const good = document.getElementById(goodId);
+  const bad  = document.getElementById(badId);
+  if (!good || !bad) return;
   let n = 0;
   function run() {
     const [b, g] = pairs[n % pairs.length];
     bad.style.opacity = '0';
     setTimeout(() => { bad.textContent = b; bad.style.opacity = '1'; }, 350);
-    setTimeout(() => typeInto(good, g, 26, () => { n++; setTimeout(run, 1200); }), 1100);
+    setTimeout(() => typeInto(good, g, speed || 24, () => { n++; setTimeout(run, 1400); }), 1100);
   }
   good.textContent = pairs[0][1]; bad.textContent = pairs[0][0];
   const start = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { start.disconnect(); run(); }
   }), { threshold: .3 });
   start.observe(good);
-})();
+}
+
+/* 01 · Humanize (also powers the home hero) */
+setupRewriteDemo('demo-good', 'demo-bad', [
+  ['I am writing to express my sincere gratitude for the opportunity and look forward to the possibility of collaborating.',
+   "Thanks so much for this — I'd genuinely love to work together. Let's make it happen."],
+  ['Please be advised that I will be unable to attend the meeting scheduled for tomorrow afternoon.',
+   "Heads up — I can't make tomorrow afternoon's meeting. Can we find another time?"],
+  ['I hope this message finds you well. I wanted to kindly follow up regarding my previous correspondence.',
+   "Hi again! Just circling back on my last note — any thoughts?"],
+  ['It would be greatly appreciated if you could provide the requested documentation at your earliest convenience.',
+   "Could you send over those docs when you get a sec? No rush."]
+], 26);
+
+/* 02 · Reply — reads the thread, drafts a fitting reply */
+setupRewriteDemo('demo2-good', 'demo2-bad', [
+  ['Them: Can we push the call to Thursday?', "Thursday works on my end — I'll move the invite over. Talk soon!"],
+  ['Them: Did you get a chance to look at the proposal?', "Just went through it — looks solid. Two small tweaks coming your way now."],
+  ['Them: Are we still on for the 3pm demo tomorrow?', "Yep, still on for 3pm — I'll send the link an hour before."]
+], 24);
+
+/* 03 · Translate — same meaning, reads naturally */
+setupRewriteDemo('demo3-good', 'demo3-bad', [
+  ["We'd love to schedule a quick call this week to walk you through the details.", 'Nous aimerions planifier un court appel cette semaine pour vous présenter les détails.'],
+  ['Thanks so much for your patience — your order ships tomorrow.', 'Muchas gracias por su paciencia: su pedido se enviará mañana.'],
+  ['Let me know if there is anything else I can help with.', "Fammi sapere se c'è altro in cui posso aiutarti."]
+], 22);
+
+/* 04 · Grammar — fixes the slips, keeps the voice */
+setupRewriteDemo('demo4-good', 'demo4-bad', [
+  ["their going to send they're feedback by end of day, its allmost ready.", "They're going to send their feedback by end of day — it's almost ready."],
+  ["i could of sent it earlier but i wasnt sure whos turn it was.", "I could have sent it earlier, but I wasn't sure whose turn it was."],
+  ['the report have alot of errors that effects the results.', 'The report has a lot of errors that affect the results.']
+], 22);
+
+/* 05 · LinkedIn Pro — sharp comment from the post */
+setupRewriteDemo('demo5-good', 'demo5-bad', [
+  ["Post: “The best hires were never the fastest to start — they were the ones I trusted.”", "Trust over speed, every time. The fast hire who needs babysitting is slower than the careful one who doesn't."],
+  ["Post: “We shipped our biggest update yet — 6 months of work from a tiny team.”", "Shipping big from a small team is the real flex. What was the hardest call you had to make along the way?"]
+], 24);
 
 /* ── LinkedIn comment-generator demo (auto-cycles tones) ── */
 (function liDemo() {
