@@ -36,6 +36,32 @@
     <p class="reveal in" data-d="2">A single floating panel follows you across Gmail, LinkedIn, WhatsApp and every text box on the web. Here's what's inside.</p>
   </section>
 
+  <!-- SEE IT WORK — flagship end-to-end flow -->
+  <section class="wrap sec" id="see-it">
+    <div class="shead reveal"><span class="eyebrow">See it work</span><h2>From their message to your <span class="grad">sent reply</span></h2><p>Draftly reads the chat you're already in, drafts or translates a reply that fits, then sends it — without you ever leaving WhatsApp.</p></div>
+    <div style="text-align:center" class="reveal"><span class="flow-step"><span class="dotp"></span> <span id="flow-step-txt">A message comes in…</span></span></div>
+    <div class="flow-scene reveal" data-d="1">
+      <!-- WhatsApp window (the source) -->
+      <div class="wa">
+        <div class="wa-head"><div class="av"></div><div><div class="nm">Marco</div><div class="st">online</div></div><span class="ico">⋮</span></div>
+        <div class="wa-body" id="wa-body"></div>
+        <div class="wa-input"><span class="box">Type a message…</span> 🎤</div>
+      </div>
+      <!-- Draftly panel (pulls, drafts, sends) -->
+      <div class="device">
+        <div class="dev-head"><span class="b"><svg><use href="#nib"/></svg>draft<span class="ly">ly</span></span><span class="pbadge">WhatsApp</span><span class="pdots"><i></i><i></i><i></i></span></div>
+        <div class="panel-tabs" id="flow-tabs"><span class="ptab" data-t="hum">Humanize</span><span class="ptab on" data-t="rep">Reply</span><span class="ptab" data-t="tr">Translate</span></div>
+        <div class="modes" id="flow-modes" style="padding-top:10px"><span class="mode on">Subtle</span><span class="mode">Human</span><span class="mode">CEO</span><span class="mode">Grammar</span></div>
+        <div class="panel-label" id="flow-l1">Conversation thread <span class="mini" id="flow-grab">↻ pulled live</span></div>
+        <div class="panel-thread" id="flow-thread"></div>
+        <div id="flow-mid"><div class="panel-input">Reply in: &nbsp;Auto (match conversation)</div></div>
+        <div class="panel-label" id="flow-l2">✦ Draftly · drafted reply</div>
+        <div class="panel-out"><span id="flow-out"></span></div>
+        <div class="panel-btns" id="flow-btns"><span class="pbtn primary">✦ Draft Reply</span><span class="pbtn green">🔍 Check</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- 01 · HUMANIZE (live demo) -->
   <section class="wrap sec">
     <div class="shead reveal"><span class="eyebrow">01 · Humanize</span><h2>Kill the <span class="grad">robot voice</span></h2><p>Type or paste anything stiff or AI‑written. Draftly keeps every fact and the full meaning — it just makes it read like a real person actually typed it.</p></div>

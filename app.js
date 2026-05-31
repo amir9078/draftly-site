@@ -181,3 +181,89 @@ setupRewriteDemo('demo5-good', 'demo5-bad', [
   }), { threshold: .3 });
   start.observe(out);
 })();
+
+/* ── flagship "See it work" scene: WhatsApp ↔ Draftly panel, end to end ── */
+(function flowDemo() {
+  const $ = id => document.getElementById(id);
+  const body = $('wa-body'), thread = $('flow-thread'), out = $('flow-out');
+  if (!body || !thread || !out) return;
+  const tabs = $('flow-tabs'), modes = $('flow-modes'), l1 = $('flow-l1'),
+        grab = $('flow-grab'), mid = $('flow-mid'), l2 = $('flow-l2'),
+        btns = $('flow-btns'), step = $('flow-step-txt');
+
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const setStep = t => { if (step) step.textContent = t; };
+  function addMsg(side, html, time) {
+    const d = document.createElement('div');
+    d.className = 'wa-msg ' + (side === 'in' ? 'wa-in' : 'wa-out');
+    d.innerHTML = html + '<span class="t">' + time + (side === 'out' ? ' ✓✓' : '') + '</span>';
+    body.appendChild(d); body.scrollTop = body.scrollHeight;
+  }
+  function typing(on) {
+    let t = body.querySelector('.wa-typing');
+    if (on && !t) { t = document.createElement('div'); t.className = 'wa-typing'; t.innerHTML = '<i></i><i></i><i></i>'; body.appendChild(t); body.scrollTop = body.scrollHeight; }
+    else if (!on && t) { t.remove(); }
+  }
+  const setTab = t => tabs.querySelectorAll('.ptab').forEach(x => x.classList.toggle('on', x.dataset.t === t));
+  function pulse(sel) { const el = btns.querySelector(sel); if (!el) return; el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
+  const typeP = (el, text, sp) => new Promise(res => typeInto(el, text, sp || 18, res));
+
+  async function replyPhase() {
+    setTab('rep'); modes.style.display = 'flex';
+    l1.firstChild.nodeValue = 'Conversation thread '; grab.textContent = '↻ pulled live';
+    mid.innerHTML = '<div class="panel-input">Reply in: &nbsp;Auto (match conversation)</div>';
+    l2.textContent = '✦ Draftly · drafted reply';
+    btns.innerHTML = '<span class="pbtn primary">✦ Draft Reply</span><span class="pbtn green">🔍 Check</span>';
+    thread.innerHTML = ''; out.textContent = '';
+
+    setStep('1 · A message comes in');
+    typing(true); await wait(900); typing(false);
+    addMsg('in', 'Hey, did the package ship yet?', '9:41'); await wait(800);
+    addMsg('in', 'I needed it by Friday 😅', '9:41'); await wait(950);
+
+    setStep('2 · Draftly pulls the whole thread');
+    thread.classList.add('flash');
+    thread.innerHTML = '<div class="thread-line"><span class="nm">Marco:</span> Hey, did the package ship yet?</div><div class="thread-line"><span class="nm">Marco:</span> I needed it by Friday</div>';
+    await wait(1100); thread.classList.remove('flash');
+
+    setStep('3 · It drafts a reply that fits the chat');
+    pulse('.pbtn.primary'); await wait(500);
+    const reply = "Hey Marco! It ships today and lands Thursday — comfortably before Friday. Sending your tracking link now.";
+    await typeP(out, reply, 17);
+    await wait(500);
+    btns.innerHTML = '<span class="pbtn primary">Apply</span><span class="pbtn green">Send ➤</span><span class="pbtn">Dismiss</span>';
+
+    setStep('4 · Send it straight back to the chat');
+    pulse('.pbtn.green'); await wait(700);
+    addMsg('out', reply, '9:42'); await wait(2000);
+  }
+
+  async function translatePhase() {
+    setTab('tr'); modes.style.display = 'none';
+    l1.firstChild.nodeValue = 'Text to translate '; grab.textContent = '↻ Grab text';
+    mid.innerHTML = '<div class="langsel"><span class="arrow">→</span> English <span class="ml">Google · AI translate</span></div>';
+    l2.textContent = '✦ Draftly · translation';
+    btns.innerHTML = '<span class="pbtn primary">Apply</span><span class="pbtn green">Send ➤</span><span class="pbtn green">Spanish &amp; Send</span>';
+    thread.innerHTML = ''; out.textContent = '';
+
+    setStep('5 · A reply lands in another language');
+    typing(true); await wait(900); typing(false);
+    addMsg('in', '¿me puedes enviar la factura?', '9:44'); await wait(1000);
+
+    setStep('6 · Draftly grabs it and translates');
+    thread.classList.add('flash');
+    thread.innerHTML = '<div class="thread-line"><span class="nm">Marco:</span> ¿me puedes enviar la factura?</div>';
+    await wait(900); thread.classList.remove('flash');
+    pulse('.pbtn.primary'); await wait(400);
+    await typeP(out, 'Marco: Can you send me the invoice?', 17);
+    await wait(900);
+
+    setStep('7 · Reply in their language, sent in one tap');
+    pulse('.pbtn.green:last-child'); await wait(700);
+    addMsg('out', '¡Claro! Te envío la factura ahora mismo 📎', '9:45'); await wait(2200);
+  }
+
+  async function loop() { while (true) { await replyPhase(); await translatePhase(); } }
+  const ob = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { ob.disconnect(); loop(); } }), { threshold: .25 });
+  ob.observe(thread);
+})();
