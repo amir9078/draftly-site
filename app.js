@@ -65,6 +65,27 @@ function setupRewriteDemo(goodId, badId, pairs, speed) {
   start.observe(good);
 }
 
+/* panel-style demo: a context block (HTML — e.g. a pulled conversation
+   thread with sender names) that fades between examples, plus a typed output
+   (the drafted reply / the translation). Mirrors the real Draftly panel. */
+function setupPanelDemo(ctxId, outId, pairs, speed) {
+  const ctx = document.getElementById(ctxId);
+  const out = document.getElementById(outId);
+  if (!ctx || !out) return;
+  let n = 0;
+  function run() {
+    const [c, o] = pairs[n % pairs.length];
+    ctx.style.opacity = '0';
+    setTimeout(() => { ctx.innerHTML = c; ctx.style.opacity = '1'; }, 380);
+    setTimeout(() => typeInto(out, o, speed || 22, () => { n++; setTimeout(run, 1900); }), 1150);
+  }
+  ctx.innerHTML = pairs[0][0]; out.textContent = pairs[0][1];
+  const start = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { start.disconnect(); run(); }
+  }), { threshold: .3 });
+  start.observe(out);
+}
+
 /* 01 · Humanize (also powers the home hero) */
 setupRewriteDemo('demo-good', 'demo-bad', [
   ['I am writing to express my sincere gratitude for the opportunity and look forward to the possibility of collaborating.',
@@ -77,18 +98,22 @@ setupRewriteDemo('demo-good', 'demo-bad', [
    "Could you send over those docs when you get a sec? No rush."]
 ], 26);
 
-/* 02 · Reply — reads the thread, drafts a fitting reply */
-setupRewriteDemo('demo2-good', 'demo2-bad', [
-  ['Them: Can we push the call to Thursday?', "Thursday works on my end — I'll move the invite over. Talk soon!"],
-  ['Them: Did you get a chance to look at the proposal?', "Just went through it — looks solid. Two small tweaks coming your way now."],
-  ['Them: Are we still on for the 3pm demo tomorrow?', "Yep, still on for 3pm — I'll send the link an hour before."]
-], 24);
+/* 02 · Reply — pulls the live thread (real sender names), drafts a fitting reply */
+setupPanelDemo('reply-ctx', 'reply-out', [
+  [`<div class="thread-line"><span class="nm">Maya:</span> the order still hasn't arrived, any update?</div><div class="thread-line you"><span class="nm">You:</span> let me check with the courier now</div><div class="thread-line"><span class="nm">Maya:</span> please do, it was due yesterday</div>`,
+   "So sorry about the wait, Maya — I've chased the courier and it's out for delivery today. Sending you the tracking link now."],
+  [`<div class="thread-line"><span class="nm">Daniel:</span> are we still on for the 3pm demo?</div><div class="thread-line you"><span class="nm">You:</span> yep, all set</div><div class="thread-line"><span class="nm">Daniel:</span> great — can you share the deck before?</div>`,
+   "Absolutely — I'll send the deck over within the hour so you can skim it beforehand. See you at 3!"]
+], 22);
 
-/* 03 · Translate — same meaning, reads naturally */
-setupRewriteDemo('demo3-good', 'demo3-bad', [
-  ["We'd love to schedule a quick call this week to walk you through the details.", 'Nous aimerions planifier un court appel cette semaine pour vous présenter les détails.'],
-  ['Thanks so much for your patience — your order ships tomorrow.', 'Muchas gracias por su paciencia: su pedido se enviará mañana.'],
-  ['Let me know if there is anything else I can help with.', "Fammi sapere se c'è altro in cui posso aiutarti."]
+/* 03 · Translate — grabs the thread from any chat, translates it cleanly */
+setupPanelDemo('trans-ctx', 'trans-out', [
+  [`<div class="thread-line"><span class="nm">Cliente:</span> ¿pueden enviar el pedido antes del viernes?</div><div class="thread-line"><span class="nm">Cliente:</span> lo necesito con urgencia</div>`,
+   "Customer: Can you ship the order before Friday? I need it urgently."],
+  [`<div class="thread-line"><span class="nm">Léa:</span> est-ce que la réunion est toujours à 15h aujourd'hui?</div>`,
+   "Léa: Is the meeting still at 3pm today?"],
+  [`<div class="thread-line"><span class="nm">Ravi:</span> क्या कल तक डिलीवरी हो जाएगी?</div>`,
+   "Ravi: Will the delivery be done by tomorrow?"]
 ], 22);
 
 /* 04 · Grammar — fixes the slips, keeps the voice */
