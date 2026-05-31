@@ -29,7 +29,7 @@ document.querySelectorAll('[data-count]').forEach(el => {
       el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString() + suf;
       if (p < 1) requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
-  }, { threshold: .5 });
+  }), { threshold: .5 });
   co.observe(el);
 });
 

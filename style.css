@@ -1,8 +1,8 @@
 /* ════════════════════════════════════════════════════════════════════
    Draftly — Aurora Noir design system (shared across all pages)
+   Fonts are loaded via <link> in each page's <head> (not @import here),
+   for maximum compatibility with sandboxed previews & strict CSP.
    ════════════════════════════════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
-
 :root{
   --bg:#070614; --bg-2:#0c0b1f;
   --blue:#4b6ef5; --cyan:#34d6e8; --violet:#8b5cf6; --indigo:#3a3df0;
