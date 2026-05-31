@@ -44,9 +44,9 @@ section{position:relative;z-index:2}
 /* ── nav ── */
 header{position:sticky;top:0;z-index:100;backdrop-filter:blur(18px);background:rgba(7,6,20,.6);border-bottom:1px solid var(--line-2)}
 nav{max-width:var(--maxw);margin:0 auto;padding:13px 26px;display:flex;align-items:center;gap:26px}
-.brand{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.02em}
+.brand{display:flex;align-items:center;gap:0;font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.02em}
 .brand .ly{color:var(--cyan)}
-.brand svg{width:28px;height:28px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(52,214,232,.55))}
+.brand svg{width:28px;height:28px;flex-shrink:0;margin-right:9px;filter:drop-shadow(0 0 8px rgba(52,214,232,.55))}
 .nav-links{margin-left:auto;display:flex;align-items:center;gap:8px}
 .nav-links a.lnk{font-size:14px;font-weight:600;color:var(--muted);transition:color .2s,background .2s;padding:8px 14px;border-radius:9px;position:relative}
 .nav-links a.lnk:hover{color:#fff;background:rgba(255,255,255,.04)}
