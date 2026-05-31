@@ -134,18 +134,21 @@ setupRewriteDemo('demo5-good', 'demo5-bad', [
   const out = document.getElementById('li-out');
   const tones = document.querySelectorAll('#li-tones .li-tone');
   if (!out || !tones.length) return;
+  const ph = document.getElementById('li-ph');
   const byTone = {
-    ceo: "Hiring great people beats hiring fast people, every single time. This is the hill I'll die on.",
-    insightful: "The part most teams miss: onboarding isn't week one, it's the first 90 days. We saw retention jump once we treated it that way.",
-    supportive: "Genuinely needed to read this today — the bit about leading with trust really landed. Thanks for putting it so clearly.",
-    curious: "Love this. Curious — how do you keep this culture intact once you're past 50 people and hiring fast?"
+    ceo: "Trust over speed, every time. The fast hire who needs managing is slower than the careful one who doesn't.",
+    insightful: "The overlooked part: trust compounds because it cuts decision latency. Teams that trust each other ship faster with less process.",
+    supportive: "This really resonates — the best people I've worked with earned trust quietly, and then everything got easier. Well put.",
+    curious: "Love this. How do you protect a trust‑first culture once you're hiring fast and scaling past 50?",
+    professional: "Strong point. Hiring for trust over raw speed tends to pay off in retention and autonomy down the line."
   };
-  const order = ['ceo', 'insightful', 'supportive', 'curious'];
+  const order = ['ceo', 'insightful', 'supportive', 'curious', 'professional'];
   let n = 0;
   function run() {
+    if (ph) ph.style.display = 'none';
     const id = order[n % order.length];
     tones.forEach(t => t.classList.toggle('on', t.dataset.tone === id));
-    typeInto(out, byTone[id], 22, () => { n++; setTimeout(run, 1700); });
+    typeInto(out, byTone[id], 20, () => { n++; setTimeout(run, 1700); });
   }
   const start = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { start.disconnect(); run(); }
@@ -156,24 +159,35 @@ setupRewriteDemo('demo5-good', 'demo5-bad', [
 /* ── LinkedIn connection-note demo (types under 200 chars) ── */
 (function noteDemo() {
   const out = document.getElementById('note-out');
+  const ph = document.getElementById('note-ph');
   const counter = document.getElementById('note-count');
+  const reasons = document.querySelectorAll('#note-reasons .li-tone');
   if (!out) return;
-  const notes = [
-    "Hi Sarah — your work scaling design at Linear is exactly the craft I keep pointing my team to. Would love to connect and trade notes.",
-    "Hey Daniel, the way you write about dev tools actually changed how we pitch ours. Big fan — would be great to be connected.",
-    "Hi Priya — saw you lead growth at Notion. I'm deep in the same trenches and would genuinely value following your thinking."
-  ];
+  // One note per "reason for connecting" — Connect / Referral / Hiring / General
+  // / Collaborate / Inspired — each written differently, all under 200 chars.
+  const byReason = {
+    connect:     "Hi Sarah — your work scaling design at Linear is exactly the craft I keep pointing my team to. Would love to connect and trade notes.",
+    referral:    "Hi Sarah — I really admire how Linear's design team operates. I'm exploring roles in the space and would value connecting to learn more.",
+    hiring:      "Hi Sarah — building a design‑led team and Linear's work is the bar I'm aiming for. Would love to connect and hear how you hire.",
+    general:     "Hi Sarah — fellow design nerd here. Linear's craft keeps raising my own standards. Would be great to connect.",
+    collaborate: "Hi Sarah — I work on adjacent tooling and think there's a neat collaboration between our teams. Would love to connect and explore it.",
+    inspired:    "Hi Sarah — your thread on design systems genuinely changed how my team works. Huge fan — would love to connect and keep learning."
+  };
+  const order = ['connect', 'referral', 'hiring', 'general', 'collaborate', 'inspired'];
   let n = 0;
-  function setCount(txt){ if(counter) counter.textContent = txt.length + '/200'; }
   function run() {
-    const note = notes[n % notes.length];
+    if (ph) ph.style.display = 'none';
+    const id = order[n % order.length];
+    if (reasons.length) reasons.forEach(r => r.classList.toggle('on', r.dataset.reason === id));
+    const note = byReason[id];
     let i = 0; out.innerHTML = '';
     const caret = document.createElement('span'); caret.className = 'caret'; out.appendChild(caret);
     (function step() {
       if (i <= note.length) {
         caret.insertAdjacentText('beforebegin', note[i - 1] || '');
-        setCount(note.slice(0, i)); i++; setTimeout(step, 22 + Math.random() * 26);
-      } else { caret.remove(); n++; setTimeout(run, 2200); }
+        if (counter) counter.textContent = note.slice(0, i).length + '/200';
+        i++; setTimeout(step, 20 + Math.random() * 24);
+      } else { caret.remove(); n++; setTimeout(run, 2100); }
     })();
   }
   const start = new IntersectionObserver(es => es.forEach(e => {

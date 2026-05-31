@@ -40,33 +40,48 @@
 
   <!-- LIVE COMMENT DEMO -->
   <section class="wrap sec">
-    <div class="shead reveal"><span class="eyebrow">Live · comments</span><h2>Comment in the <span class="grad">right voice</span>, instantly</h2><p>It reads the actual post, then writes to the tone you choose. Watch it switch angles in real time.</p></div>
+    <div class="shead reveal"><span class="eyebrow">Live · comments</span><h2>Comment in the <span class="grad">right voice</span>, instantly</h2><p>Click into any post's comment box and the ✦ toolbar appears. Pick a tone — <b style="color:#fff">⚡ CEO, Insightful, Supportive, Curious</b> or <b style="color:#fff">Professional</b> — and Draftly reads the post and writes the comment for you.</p></div>
     <div class="li-demo reveal" data-d="1">
       <div class="li-post">
         <div class="li-top"><div class="li-av"></div><div><div class="li-name">Jordan Mehta · 2nd</div><div class="li-sub">Founder &amp; CEO · Building in public</div></div></div>
-        <div class="li-postbody">Hot take after 8 years of hiring: the best people I ever brought on were never the fastest to start. They were the ones I trusted. Speed is overrated. Trust compounds.</div>
+        <div class="li-postbody">Hot take after 8 years of hiring: the best people I ever brought on were never the fastest to start. They were the ones I trusted. Speed is overrated — trust compounds.</div>
         <div class="li-actions"><span>👍 Like</span><span>💬 Comment</span><span>↻ Repost</span><span>➤ Send</span></div>
       </div>
-      <div class="li-commentbar">
-        <div class="li-tones" id="li-tones">
-          <span class="li-tone on" data-tone="ceo">⚡ CEO</span>
-          <span class="li-tone" data-tone="insightful">Insightful</span>
-          <span class="li-tone" data-tone="supportive">Supportive</span>
-          <span class="li-tone" data-tone="curious">Curious</span>
-        </div>
-        <div class="li-out"><span class="li-outlabel">✦ Draftly · writing…</span><span id="li-out"></span></div>
+      <!-- Draftly tone toolbar — appears over the comment box -->
+      <div class="li-tonebar" id="li-tones">
+        <span class="li-nib">✦</span>
+        <span class="li-tone on" data-tone="ceo">⚡ CEO</span>
+        <span class="li-tone" data-tone="insightful">Insightful</span>
+        <span class="li-tone" data-tone="supportive">Supportive</span>
+        <span class="li-tone" data-tone="curious">Curious</span>
+        <span class="li-tone" data-tone="professional">Professional</span>
       </div>
+      <!-- LinkedIn comment box, filled live -->
+      <div class="li-commentbox"><span id="li-out"></span><span class="li-cph" id="li-ph">Add a comment…</span></div>
+      <div class="li-cmt-actions"><span>😊</span><span>GIF</span><span>🖼</span><span class="grow"></span><span class="post">Post</span></div>
     </div>
   </section>
 
   <!-- LIVE NOTE DEMO -->
   <section class="wrap sec" id="note">
-    <div class="shead reveal"><span class="eyebrow">Live · connection notes</span><h2>Invitations tuned to <span class="grad">get accepted</span></h2><p>It pulls the person's real name and headline from their profile, then writes a personal note — always under LinkedIn's 200‑character limit, never a [placeholder].</p></div>
-    <div class="li-demo reveal" data-d="1" style="max-width:480px">
-      <div class="li-post" style="display:flex;align-items:center;gap:12px"><div class="li-av"></div><div><div class="li-name">Sarah Lindqvist</div><div class="li-sub">Head of Design @ Linear · 2nd</div></div><span class="new" style="position:static;margin-left:auto">Connect</span></div>
-      <div class="li-commentbar">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span class="li-outlabel" style="margin:0">✦ Personalised note</span><span id="note-count" style="font-size:11px;color:var(--cyan);font-weight:700">0/200</span></div>
-        <div class="li-out" style="min-height:72px"><span id="note-out"></span></div>
+    <div class="shead reveal"><span class="eyebrow">Live · connection notes</span><h2>Invitations tuned to <span class="grad">get accepted</span></h2><p>On the "Add a note" pop‑up, pick why you're reaching out — <b style="color:#fff">Connect, Referral, Hiring, General, Collaborate</b> or <b style="color:#fff">Inspired</b>. Draftly pulls the person's real name &amp; headline and writes a note that fits — always under 200 characters, never a [placeholder].</p></div>
+    <div class="li-demo li-invite reveal" data-d="1">
+      <div class="inv-card">
+        <div class="inv-title">Add a note to your invitation</div>
+        <div class="inv-sub">3 personalized invitations remaining for this month.</div>
+        <div class="inv-textarea"><span id="note-out"></span><span class="inv-ph" id="note-ph">Ex: We know each other from…</span></div>
+        <div class="inv-count" id="note-count">0/200</div>
+        <!-- Draftly note reason bar -->
+        <div class="li-tonebar" id="note-reasons" style="margin-bottom:0">
+          <span class="li-nib">✦ Note</span>
+          <span class="li-tone on" data-reason="connect">Connect</span>
+          <span class="li-tone" data-reason="referral">Referral</span>
+          <span class="li-tone" data-reason="hiring">Hiring</span>
+          <span class="li-tone" data-reason="general">General</span>
+          <span class="li-tone" data-reason="collaborate">Collaborate</span>
+          <span class="li-tone" data-reason="inspired">Inspired</span>
+        </div>
+        <div class="inv-foot"><span class="inv-cancel">Cancel</span><span class="inv-send">Send</span></div>
       </div>
     </div>
   </section>
@@ -76,7 +91,7 @@
     <div class="shead reveal"><span class="eyebrow">Why it lands</span><h2>Built to sound <span class="grad">human</span></h2></div>
     <div class="cards">
       <div class="card reveal" data-d="1"><div class="ic">🎯</div><h3>Reads the real context</h3><p>Pulls the actual post text, or the person's name &amp; headline, straight from the page — so every line is specific, never generic.</p></div>
-      <div class="card reveal" data-d="2"><div class="ic">🎭</div><h3>Six angles, one click</h3><p>CEO one‑liner, insightful, supportive, curious — for comments. Connect, referral, hiring, collab &amp; more — for notes.</p></div>
+      <div class="card reveal" data-d="2"><div class="ic">🎭</div><h3>Five tones, six reasons</h3><p>Comments: CEO, Insightful, Supportive, Curious, Professional. Notes: Connect, Referral, Hiring, General, Collaborate, Inspired — each written its own way.</p></div>
       <div class="card reveal" data-d="3"><div class="ic">🚫</div><h3>No AI tells</h3><p>Bans "Great post!", "Couldn't agree more" and bracketed placeholders. Contractions, real opinions, human rhythm.</p></div>
     </div>
   </section>
