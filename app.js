@@ -35,6 +35,11 @@ document.querySelectorAll('.cards').forEach(row => {
   });
   window.addEventListener('mouseup', () => { if (isDown) { isDown = false; row.classList.remove('dragging'); } });
   row.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  row.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    e.preventDefault();
+    row.scrollLeft += e.deltaY;
+  }, { passive: false });
 });
 
 /* ── count-up on view ── */

@@ -134,7 +134,7 @@ nav{max-width:var(--maxw);margin:0 auto;padding:8px 12px 8px 24px;display:flex;a
 
 /* ── glass cards w/ animated gradient border — horizontal scenario scroll ── */
 .cards{display:flex;gap:18px;overflow-x:auto;padding:4px 4px 18px;margin-inline:-4px;
-  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;cursor:grab;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;cursor:grab;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 2%,#000 92%,transparent);
           mask-image:linear-gradient(90deg,transparent,#000 2%,#000 92%,transparent)}
 .cards.dragging{cursor:grabbing;scroll-snap-type:none}
