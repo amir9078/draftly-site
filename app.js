@@ -20,6 +20,23 @@ document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove'
   c.style.setProperty('--my', (e.clientY - r.top) + 'px');
 }));
 
+/* ── click-and-drag scroll for horizontal card rows ── */
+document.querySelectorAll('.cards').forEach(row => {
+  let isDown = false, startX = 0, startScroll = 0, moved = false;
+  row.addEventListener('mousedown', e => {
+    isDown = true; moved = false; row.classList.add('dragging');
+    startX = e.pageX; startScroll = row.scrollLeft;
+  });
+  window.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    row.scrollLeft = startScroll - dx;
+  });
+  window.addEventListener('mouseup', () => { if (isDown) { isDown = false; row.classList.remove('dragging'); } });
+  row.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+});
+
 /* ── count-up on view ── */
 document.querySelectorAll('[data-count]').forEach(el => {
   const co = new IntersectionObserver(es => es.forEach(e => {
